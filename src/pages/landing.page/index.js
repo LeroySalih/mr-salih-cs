@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import PageTitle from "../../UI/page.title";
-import p5 from "p5";
+
 
 const H1 = styled.div`
   font-family: "Monoton", Verdana;
@@ -10,14 +10,15 @@ const H1 = styled.div`
 
 export default () => {
   const myRef = useRef();
-  const [p5Sketch, setp5Sketch] = useState(null);
+  //const [p5Sketch, setp5Sketch] = useState(null);
 
   useEffect(() => {
-    if (!p5Sketch) {
+    //if (!p5Sketch) {
       // setp5Sketch(new p5(sketch, myRef.current));
-    }
+    //}
   }, []);
 
+  /*
   const sketch = s => {
     let x;
 
@@ -32,6 +33,7 @@ export default () => {
       x = x + 1;
     };
   };
+  */
 
   return (
     <div>
