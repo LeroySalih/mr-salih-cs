@@ -1,5 +1,6 @@
 import React from "react";
 import "./styles.css";
+import "./prism.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 

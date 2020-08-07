@@ -14,6 +14,9 @@ import Solution, {SolutionHeading, SolutionBody} from '../../UI/solution';
 import TabPanel from '../../UI/tab.panel';
 import Example from "./example.png";
 
+
+import SketchEditor from '../../UI/sketch.editor';
+
 const ExampleImage = styled.img`
   width: 30rem;
 `;
@@ -28,6 +31,36 @@ export default () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const initialCode = `
+    s.background("green");
+    s.fill("white");
+    s.rect(10, 10, 80, 80);
+  `
+  const initialCodeOld = `function _draw() {
+    // This code creates the variables that stores the coordinates. 
+    var Ax = 1;
+    var Ay = 1;
+
+    var Bx = 2;
+    var By = 10;
+
+    // Draw a point at points A and B
+    s.point(Ax, Ay);
+    s.point(Bx, By);
+
+    // Draw a line between A and B 
+    s.line(Ax, Ay, Bx, By);
+    
+  /* Edit below to complete the triangle */
+  // 1. Draw a point to show point C using the variables for point A and point B
+  // 2. Draw a line from point A to C
+  // 3. Draw a line from point B to C   
+    
+    
+
+  /* do not change below this line */
+  }`
 
   return (
     <Container>
@@ -141,7 +174,7 @@ export default () => {
         </tr>
         </tbody>
       </Table>
-        </TabPanel>
+      </TabPanel>
       <TabPanel value={value} index={1} >
         <Solution>
           <SolutionHeading>Solution: Find the third vertice.</SolutionHeading>
@@ -194,9 +227,12 @@ export default () => {
         </tr>
         </tbody>
       </Table>
-        </TabPanel>
+    </TabPanel>
         
    
+      <SketchEditor initialCode={initialCode}/>
     </Container>
   );
 };
+
+
