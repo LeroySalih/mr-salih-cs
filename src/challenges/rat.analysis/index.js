@@ -32,35 +32,27 @@ export default () => {
     setValue(newValue);
   };
 
+
   const initialCode = `
-    s.background("green");
-    s.fill("white");
-    s.rect(10, 10, 80, 80);
+    var x;
+
+    function setup() {
+      p5.createCanvas(200, 200);
+      p5.background(100);
+      p5.angleMode(p5.DEGREES);
+      x = 0;  
+    }
+  
+function draw() {
+
+  p5.translate(x, 10)
+  p5.rotate(x);
+  p5.rect(0, 0, 30, 30);
+  x = x + 1;
+  
+}
+
   `
-  const initialCodeOld = `function _draw() {
-    // This code creates the variables that stores the coordinates. 
-    var Ax = 1;
-    var Ay = 1;
-
-    var Bx = 2;
-    var By = 10;
-
-    // Draw a point at points A and B
-    s.point(Ax, Ay);
-    s.point(Bx, By);
-
-    // Draw a line between A and B 
-    s.line(Ax, Ay, Bx, By);
-    
-  /* Edit below to complete the triangle */
-  // 1. Draw a point to show point C using the variables for point A and point B
-  // 2. Draw a line from point A to C
-  // 3. Draw a line from point B to C   
-    
-    
-
-  /* do not change below this line */
-  }`
 
   return (
     <Container>

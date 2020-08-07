@@ -44,67 +44,46 @@ export default ({initialCode}) => {
 
   useEffect(() => {
 
+    var fnStr = code;
 
-    var sketchStr = `(s) => {
-     
-      s._user_draw = ${code};
+    fnStr = fnStr.replace('function setup','p5.setup = function ');
+    fnStr = fnStr.replace('function draw','p5.draw = function ');
+    fnStr = fnStr.replace('function mousePressed','p5.mousePressed = function ');
 
-      s.setup = () => {
-        s.createCanvas(300, 300);
-        s.background(0);
-      }
-
-      s.draw = () => {
-        s.background(255);
-      }
-    }
-    ` 
-
+    var testSketch = new Function ('p5', fnStr);
     
-    var sketch = (s) => {
-      
-      s._myDraw = (s) => {
-        s.background("red");
-        s.fill("yellow");
-        s.rect(10, 10, 80, 80);
-      }
-
-      s.updateDraw = (newDraw) => {
-        s._myDraw = newDraw;
-      }
-
-      s.setup = () => {
-        s.createCanvas(300, 300);
-        s.background(0);
-      }
-
-      s.draw = () => {
-        s._myDraw(s);
-      }
-    }
-
     if (!p5Sketch){
-      setp5Sketch(new p5(sketch, sketchRef.current));
+      setp5Sketch(new p5(testSketch, sketchRef.current));
     }
 
-  }
-  );
+  }, []);
 
   const updateCode = () => {
-    console.log('Building with: ', code);
-    setp5Sketch(prev => {
-      prev._myDraw = new Function('s', `${code}`);
 
-      return prev;
-    });
+    p5Sketch.remove();
+    var fnStr = code;
+    fnStr = fnStr.replace('function setup','p5.setup = function ');
+    fnStr = fnStr.replace('function draw','p5.draw = function ');
+    fnStr = fnStr.replace('function mousePressed','p5.mousePressed = function ');
 
+    console.log('Converting:', fnStr);
     
+
+    try {
+      var testSketch = new Function ('p5', fnStr);
+      setp5Sketch(new p5(testSketch, sketchRef.current));
+    } catch (e) {
+      console.log(e)
+    }
+    
+
   }
 
   return (
     <SketchEditor>
       <div>
         <Button onClick={() => updateCode()}>Run Code</Button>
+        <Button onClick={() => p5Sketch.noLoop()}>Halt Code</Button>
       </div>
       <EditorPanel>
       <Editor
