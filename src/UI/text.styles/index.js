@@ -83,6 +83,14 @@ export const Quote = styled.div`
   }
 `;
 
+export const Ul = styled.ul`
+  margin-top: -40px;
+  li {
+    font-family: "Open Sans";
+    margin-bottom: 3px;
+  }
+`
+
 export const QuoteText = styled.span`
   ::before {
     font-size: 3rem;
@@ -106,5 +114,44 @@ export const QuoteSource = styled.div`
   margin-top: 20px;
   text-align: right;
 `;
+
+export const Caption = styled.div`
+  color: grey;
+  font-style: italic;
+  font-size: 0.8rem;
+  margin-top: 10px;
+
+` 
+
+export const Table = styled.table`
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  th {
+    padding: 10px;
+    background-color: silver;
+    text-align: center;
+    border-bottom: black 1px solid;
+    font-family: 'Open Sans';
+    font-size: 0.8rem;
+  }
+
+  td {
+    padding: 5px; 
+    border-right: silver 1px dashed;
+    font-family: 'Open Sans';
+    font-size: 0.8rem;
+
+  }
+
+
+  td:last-child {
+    border-right: none;
+  }
+
+
+`
+
 
 export { BlockMath, InlineMath };

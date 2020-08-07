@@ -1,17 +1,34 @@
 import React from "react";
 import styled from "styled-components";
 
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+
+
+
 import Container from "../../UI/container";
 import PageTitle from "../../UI/page.title";
-import { H1, H2, H3, H4, Text } from "../../UI/text.styles";
-
+import { H1, H2, H3, H4, Text, Caption, Table, Ul } from "../../UI/text.styles";
+import Task, {TaskHeading, TaskBody} from '../../UI/task';
+import Solution, {SolutionHeading, SolutionBody} from '../../UI/solution';
+import TabPanel from '../../UI/tab.panel';
 import Example from "./example.png";
 
 const ExampleImage = styled.img`
   width: 30rem;
 `;
 
+
+
+
 export default () => {
+
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
     <Container>
       <PageTitle>
@@ -31,25 +48,155 @@ export default () => {
         (visualise) as much information as we can find, on a given RAT from only
         its hypotenues. We will find:
       </Text>
+      
+      <Ul>
+        <li>Coordinates of the triangle verticies.</li>
+        <li>Perimeter of the triangle.</li>
+        <li>Angles of the triangle</li>
+        <li>Area of the triangle</li>
+      </Ul>
+
       <Text>
-        <ul>
-          <li>Coordinates of the triangle verticies.</li>
-          <li>Perimeter of the triangle.</li>
-          <li>Angles of the triangle</li>
-          <li>Area of the triangle</li>
-        </ul>
-        all from 2 coordinates (😊).
-      </Text>
+        all from 2 coordinates (<span role="img" aria-label="smiley face">😊</span>).
+        </Text>
       <H3>Step 1: The Maths</H3>
       <Text>
         Before we start programming, we are going to ensure that we understand
         the maths behind the task.
       </Text>
+      <div style={{textAlign: "center"}}>
       <ExampleImage src={Example} />
+      <Caption>4 different hypotenues AB, AD, AF and AH</Caption>
+      </div>
       <Text>
-        The image above shows 4 different hypotenues, AB. AD, AF and AH. The
-        dotted lines show the triangles that they form.
+        The image above shows 4 different triangles, with hypotenues AB, AD, AF and AH. The
+        dotted lines show the triangles that they form.  For each triangle, we have the coordinates of 2 of the vertices.  The first thing we are going to calculate are the coordinates of the third vertice, which has the right angle.
       </Text>
+
+
+
+      <Tabs
+        value={value}
+        indicatorColor="primary"
+        textColor="primary"
+        onChange={handleChange}
+        aria-label="disabled tabs example"
+      >
+        <Tab label="Task">
+        
+   
+        </Tab>
+        <Tab label="Solution"  />
+        
+      </Tabs>
+
+      <TabPanel value={value} index={0} >
+      <Task>
+          <TaskHeading>Task: Find the third vertice.</TaskHeading>
+          <TaskBody>
+            <p>The table below has the coordinates used in the previous image.  For each triangle, calculate the missing coordinates.</p>
+            <p>The final line asks you to consider a general rule.  Is there a pattern from the previous coordinates?  How can you describe this pattern using the letters a, b, c and d?</p>
+          </TaskBody> 
+        </Task>
+
+      <Table>
+        <thead>
+        <tr>
+          <th>Line</th>
+          <th>Coordinates of Start</th>
+          <th>Coordinates of End</th>
+          <th>Coordinates of Right Angle</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>AB</td>
+          <td>(1,1)</td>
+          <td>(3, 4)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>AD</td>
+          <td>(1,1)</td>
+          <td>(-1, 3)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>AF</td>
+          <td>(1,1)</td>
+          <td>(-2, -1)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>AH</td>
+          <td>(1,1)</td>
+          <td>(4, -2)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>General</td>
+          <td>(a, b)</td>
+          <td>(c, d)</td>
+          <td></td>
+        </tr>
+        </tbody>
+      </Table>
+        </TabPanel>
+      <TabPanel value={value} index={1} >
+        <Solution>
+          <SolutionHeading>Solution: Find the third vertice.</SolutionHeading>
+          <SolutionBody>
+            <p>While calculating the coordinate of the third vertice, you may have seen a pattern.  The answer is always the x coordinate of the start and the y coordinate of the end.</p>
+            <p>So, if the start is (a, b) and the end is (c, d), then the third coordinate will always be (c, b)</p>
+            <p>Remember: this only works for right angle triangles</p>
+          </SolutionBody> 
+        </Solution>
+
+      <Table>
+        <thead>
+        <tr>
+          <th>Line</th>
+          <th>Coordinates of Start</th>
+          <th>Coordinates of End</th>
+          <th>Coordinates of Right Angle</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>AB</td>
+          <td>(1,1)</td>
+          <td>(3, 4)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>AD</td>
+          <td>(1,1)</td>
+          <td>(-1, 3)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>AF</td>
+          <td>(1,1)</td>
+          <td>(-2, -1)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>AH</td>
+          <td>(1,1)</td>
+          <td>(4, -2)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>General</td>
+          <td>(a, b)</td>
+          <td>(c, d)</td>
+          <td></td>
+        </tr>
+        </tbody>
+      </Table>
+        </TabPanel>
+        
+   
     </Container>
   );
 };
